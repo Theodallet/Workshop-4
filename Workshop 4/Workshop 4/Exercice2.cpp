@@ -6,11 +6,13 @@ using namespace std;
 Objet2D::Objet2D(void) {
 	this->dim1 = 0;
 	this->dim2 = 0;
+	this->Suivant = nullptr;
 }
 
 Objet2D::Objet2D(int tdim1, int tdim2) {
 	this->dim1 = tdim1;
 	this->dim2 = tdim2;
+	this->Suivant = nullptr;
 }
 
 int Objet2D::getPerimetre() {
@@ -62,7 +64,7 @@ void Rectangle::afficheInfo() {
 	cout << "Dimensions : " << dim1 << ", " << dim2 << endl;
 	cout << "Longueur : " << getLongueur() << endl;
 	cout << "Largeur : " << getLargueur() << endl;
-	cout << "Perimètre : " << getPerimetre() << endl;
+	cout << "PerimÃ¨tre : " << getPerimetre() << endl;
 	cout << "Aire : " << getAire() <<endl;
 }
 
@@ -82,7 +84,7 @@ void Cube::afficheInfo() {
 	cout << "Carre" << endl;
 	cout << "Dimensions : " << dim1 << endl;
 	cout << "Longueur : " << getCote() << endl;
-	cout << "Perimètre : " << getPerimetre() << endl;
+	cout << "PerimÃ¨tre : " << getPerimetre() << endl;
 	cout << "Aire : " << getAire() << endl;
 }
 
@@ -104,7 +106,7 @@ int StockageObjet2D::taille() {
 		return 0;
 	}
 
-												// Sinon, la taille est égale au nombre d'éléments
+												// Sinon, la taille est Ã©gale au nombre d'Ã©lÃ©ments
 	int taille = 1;
 	Objet2D* courant = Head;
 	while (courant->getSuivant() != nullptr) {
@@ -122,7 +124,7 @@ void StockageObjet2D::AtHead(Objet2D* Objet) {
 		}
 		else {					
 			Head->setSuivant(nouveau);	// Sinon on deplace la valeur de la head au suivant
-			Head = nouveau;				// Puis la head est égale à la nouvelle valeur
+			Head = nouveau;				// Puis la head est Ã©gale Ã  la nouvelle valeur
 		}
 }
 
@@ -134,18 +136,18 @@ void StockageObjet2D::AtTail(Objet2D* Objet){
 	}
 	else {
 		Tail->setSuivant(nouveau);		// Sinon on deplace la valeur de la Tail au suivant
-		Tail = nouveau;					// Puis la Tail est égale à la nouvelle valeur
+		Tail = nouveau;					// Puis la Tail est Ã©gale Ã  la nouvelle valeur
 	}
 }
 
 void StockageObjet2D::AtIndex(Objet2D* Objet, int index){
-	if (index < 0 || index >= taille()) {			// On vérifie que la valeur est bien dans notre interval c'est-à-dire que ce soit entre 0 et le nombre d'élément de la liste
+	if (index < 0 || index >= taille()) {			// On vÃ©rifie que la valeur est bien dans notre interval c'est-Ã -dire que ce soit entre 0 et le nombre d'Ã©lÃ©ment de la liste
 		return;
 	}
 
 	Objet2D* nouveau = Objet;
 	
-	if (index == 0) {							// Si l'index est à 0 alors c'est qu'on met la valeur sur la head
+	if (index == 0) {							// Si l'index est Ã  0 alors c'est qu'on met la valeur sur la head
 		AtHead(nouveau);
 		return;
 	}
@@ -155,7 +157,7 @@ void StockageObjet2D::AtIndex(Objet2D* Objet, int index){
 		return;
 	}
 
-	Objet2D* precedent = Head;					// L'objet est ajouté à l'index demander 
+	Objet2D* precedent = Head;					// L'objet est ajoutÃ© Ã  l'index demander 
 
 	for (int i = 0; i < index - 1; i++) {
 		precedent = precedent->getSuivant();
@@ -169,13 +171,13 @@ void StockageObjet2D::SupHead() {
 	if (Head == nullptr) {
 		return;
 	}
-												// Si la liste ne contient qu'un élément, la tête et la queue sont mises à nullptr
+												// Si la liste ne contient qu'un Ã©lÃ©ment, la tÃªte et la queue sont mises Ã  nullptr
 	if (Head == Tail) {
 		Head = nullptr;
 		Tail = nullptr;
 	}
 	else {
-												// La tête devient le deuxième élément
+												// La tÃªte devient le deuxiÃ¨me Ã©lÃ©ment
 		Head = Head->getSuivant();
 	}
 }
@@ -185,40 +187,40 @@ void StockageObjet2D::SupTail() {
 	if (Head == nullptr) {
 		return;
 	}
-												// Si la liste ne contient qu'un élément, la tête et la queue sont mises à nullptr
+												// Si la liste ne contient qu'un Ã©lÃ©ment, la tÃªte et la queue sont mises Ã  nullptr
 	if (Head == Tail) {
 		Head = nullptr;
 		Tail = nullptr;
 	}
 	else {
-												// On parcourt la liste jusqu'au deuxième dernier élément
+												// On parcourt la liste jusqu'au deuxiÃ¨me dernier Ã©lÃ©ment
 		Objet2D* precedent = Head;
 		while (precedent->getSuivant()->getSuivant() != nullptr) {
 			precedent = precedent->getSuivant();
 		}
-												// Le deuxième dernier élément devient la nouvelle queue
+												// Le deuxiÃ¨me dernier Ã©lÃ©ment devient la nouvelle queue
 		Tail = precedent;
-												// On supprime le dernier élément
+												// On supprime le dernier Ã©lÃ©ment
 		precedent->setSuivant(nullptr);
 	}
 }
 
 void StockageObjet2D::SupIndex(int index) {
-												// Si l'index est négatif ou supérieur à la taille de la liste, ne fait rien
+												// Si l'index est nÃ©gatif ou supÃ©rieur Ã  la taille de la liste, ne fait rien
 	if (index < 0 || index >= taille()) {
 		return;
 	}
-												// Si l'index est 0, on supprime l'élément en tête
+												// Si l'index est 0, on supprime l'Ã©lÃ©ment en tÃªte
 	if (index == 0) {
 		SupHead();
 		return;
 	}
-												// Si l'index est la taille de la liste, on supprime l'élément en queue
+												// Si l'index est la taille de la liste, on supprime l'Ã©lÃ©ment en queue
 	if (index == taille() - 1) {
 		SupTail();
 		return;         
 	}
-												// On parcourt la liste jusqu'à l'élément à supprimer
+												// On parcourt la liste jusqu'Ã  l'Ã©lÃ©ment Ã  supprimer
 	Objet2D* precedent = Head;
 	for (int i = 0; i < index - 1; i++) {
 		precedent = precedent->getSuivant();
