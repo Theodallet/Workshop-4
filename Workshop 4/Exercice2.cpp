@@ -22,8 +22,7 @@ int Objet2D::getAire() {
 }
 
 void Objet2D::afficheInfo() {
-	cout << "je suis un Objet2d \n";
-	cout << "la longuer est :" << this->dim1 << "\t la largeur est :" << this->dim2 << endl;
+	cout << "Dimensions : " << dim1 << ", " << dim2 << endl;
 }
 
 Objet2D* Objet2D::getSuivant(){
@@ -59,7 +58,12 @@ int Rectangle::getAire() {
 }
 
 void Rectangle::afficheInfo() {
-	cout << "rectangle";
+	cout << "Rectangle" << endl;
+	cout << "Dimensions : " << dim1 << ", " << dim2 << endl;
+	cout << "Longueur : " << getLongueur() << endl;
+	cout << "Largeur : " << getLargueur() << endl;
+	cout << "Perimètre : " << getPerimetre() << endl;
+	cout << "Aire : " << getAire() <<endl;
 }
 
 //------------------------------------------------------------------------------
@@ -75,7 +79,11 @@ int Cube::getCote() {
 }
 
 void Cube::afficheInfo() {
-	cout << "carre";
+	cout << "Carre" << endl;
+	cout << "Dimensions : " << dim1 << endl;
+	cout << "Longueur : " << getCote() << endl;
+	cout << "Perimètre : " << getPerimetre() << endl;
+	cout << "Aire : " << getAire() << endl;
 }
 
 //------------------------------------------------------------------------------
@@ -83,6 +91,11 @@ void Cube::afficheInfo() {
 StockageObjet2D::StockageObjet2D(){
 	this->Head = nullptr;				//Initialisation en mettant qu'il n'y a pas de valeur
 	this->Tail = nullptr;
+}
+
+Objet2D* StockageObjet2D::getHead()
+{
+	return this -> Head;
 }
 
 int StockageObjet2D::taille() {

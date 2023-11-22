@@ -36,11 +36,12 @@ public:
 };
 
 class StockageObjet2D {
-private:
+protected:
 	Objet2D* Head;
 	Objet2D* Tail;
 public:
 	StockageObjet2D();
+	Objet2D* getHead();
 	int taille();
 	void AtHead(Objet2D* Objet);
 	void AtTail(Objet2D* Objet);
